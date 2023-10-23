@@ -30,8 +30,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/matrixing26/Project-RAS">
-    <img src="images/logo.png" alt="Logo" height="80">
+  <a href="https://github.com/supercgor/RAS-Deepxde">
+    <img src="logo.png" alt="Logo" height="80">
   </a>
 
   <h3 align="center">Physics informed active learning (PIAL) for DeepONet</h3>
@@ -39,14 +39,14 @@
   <p align="center">
     This repo is using physics-informed active learning (PIAL) to accelerate the training of neural networks (NNs) for solving partial differential equations (PDEs).
     <br />
-    <a href="https://github.com/matrixing26/Project-RAS"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/supercgor/RAS-Deepxde"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/matrixing26/Project-RAS">View Demo</a>
+    <a href="https://github.com/supercgor/RAS-Deepxde">View Demo</a>
     ·
-    <a href="https://github.com/matrixing26/Project-RAS/issues">Report Bug</a>
+    <a href="https://github.com/supercgor/RAS-Deepxde/issues">Report Bug</a>
     ·
-    <a href="https://github.com/matrixing26/Project-RAS/issues">Request Feature</a>
+    <a href="https://github.com/supercgor/RAS-Deepxde/issues">Request Feature</a>
   </p>
 </div>
 
@@ -85,7 +85,7 @@
 
 This project is still developing. And the backend using to test is PyTorch. There may be some bugs in the code. If you find any bugs, please contact us. Thank you very much. 
 
-This project is mainly developed by: ...
+This repo is mainly developed by: Chon Hei Lo
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -96,24 +96,24 @@ This project is mainly developed by: ...
 ### Prerequisites
 
 * Python 3.10
-* Cuda 11.3 or 11.7
-* PyTorch 2.0.0
+* Cuda 12.1
+* PyTorch 2.1.0
 
 ### Installation
 Clone this repo!
 ```sh
-git clone --recurse-submodules https://github.com/matrixing26/Project-RAS.git
+git clone --recurse-submodules https://github.com/supercgor/RAS-Deepxde.git
 ```
 
 
 These codes might help you to install the environment for this project.
 
 ```sh
-    conda create -n pial python=3.10
-    conda activate pial
-    conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
-    conda install matplotlib numpy scipy scikit-learn jupyter nbconvert
-    conda install -c conda-forge scikit-optimize
+    conda create -n ras python=3.10
+    conda activate ras
+    conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+    conda install matplotlib numpy scipy scikit-learn jupyter
+    conda install -c conda-forge scikit-optimize hydra-core
 
 ```
 
@@ -136,7 +136,7 @@ Edit test_pde.ipynb might help you to understand how to use this project.
 ## TODO
 We can use PIAL_L2norm.ipynb to generate new data and train the network. But no visualization here, and if someone has time, write a function for model.data.TripleCartesianProd, allow it to extract inputs[0][...,0] as aux input.
 
-See the [open issues](https://github.com/matrixing26/Project-RAS/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/supercgor/RAS-Deepxde/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

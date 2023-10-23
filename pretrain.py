@@ -66,7 +66,7 @@ def main(cfg):
     model.compile("adam", lr = cfg.optimizer.lr, loss = "mse", metrics = ["l2 relative error"], decay = cfg.optimizer.decay)
 
     # %%
-    losshistory, train_state = model.train(iterations = cfg.pde.train.iters, batch_size = cfg.pde.train.batch_size)
+    losshistory, train_state = model.train(iterations = cfg.pde.train.pre_iters, batch_size = cfg.pde.train.batch_size)
     
     utils.model_save(net, save_path)
 

@@ -15,6 +15,7 @@ model:
 
 train:
   batch_size: 10000
+  pre_iters: 20000
   iters: 10000
   max_save: 1
   init_train_size: 50

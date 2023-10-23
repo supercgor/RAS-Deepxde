@@ -1,4 +1,5 @@
 name: "UnionSpace"
+alias: "GRF0.1+GRF1.0"
 params:
   - name: "GRF"
     params:

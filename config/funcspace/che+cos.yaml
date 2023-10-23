@@ -1,4 +1,5 @@
 name: "UnionSpace"
+alias: "COS+Che"
 params:
   - name: "COS"
     params:

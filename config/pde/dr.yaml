@@ -47,7 +47,7 @@ solver:
   
 datasets:
   workdir: ./data/dr
-  pretrain_path: f"${pde.datasets.workdir}/{utils.get_space_name(space)}_${pde.train.init_train_size}.pth"
-  train_path: f"${pde.datasets.workdir}/{utils.get_space_name(space)}_${pde.train.init_train_size}_t.npz"
-  test_path: f"${pde.datasets.workdir}/{utils.get_space_name(space)}_${pde.train.test_size}_v.npz"
+  pretrain_path: f"${pde.datasets.workdir}/${funcspace.alias}_${pde.train.init_train_size}.pth"
+  train_path: f"${pde.datasets.workdir}/${funcspace.alias}_${pde.train.init_train_size}_t.npz"
+  test_path: f"${pde.datasets.workdir}/${funcspace.alias}_${pde.train.test_size}_v.npz"
   

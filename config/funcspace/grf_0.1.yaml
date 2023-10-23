@@ -1,3 +1,4 @@
 name: "GRF"
+alias: "GRF0.1"
 params:
   length_scale: 0.1

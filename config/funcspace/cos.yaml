@@ -1,3 +1,4 @@
 name: "COS"
+alias: "COS"
 params:
   N: 20

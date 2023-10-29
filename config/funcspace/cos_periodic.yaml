@@ -1,5 +1,5 @@
 name: "COS"
 alias: "Cos_P"
 params:
-  N: 5
+  N: 2
   omega: 2 * np.pi

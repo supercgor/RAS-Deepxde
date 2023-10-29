@@ -4,7 +4,7 @@ params:
   - name: "GRF"
     params:
       length_scale: 1.0
-      kernal: ExpSineSquared
+      kernel: ExpSineSquared
   - name: "COS"
     params:
       N: 2

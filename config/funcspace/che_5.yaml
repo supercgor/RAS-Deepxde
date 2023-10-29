@@ -1,0 +1,5 @@
+name: "Chebyshev"
+alias: "Che5"
+params:
+  N: 5
+  M: 1

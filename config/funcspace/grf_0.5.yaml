@@ -1,0 +1,4 @@
+name: "GRF"
+alias: "GRF0.5"
+params:
+  length_scale: 0.5

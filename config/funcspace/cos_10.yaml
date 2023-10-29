@@ -1,0 +1,5 @@
+name: "COS"
+alias: "Cos10"
+params:
+  N: 10
+  omega: 1.0

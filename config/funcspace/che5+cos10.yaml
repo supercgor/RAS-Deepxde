@@ -1,0 +1,10 @@
+name: "UnionSpace"
+alias: "Che5+Cos10"
+params:
+  - name: "COS"
+    params:
+      N: 10
+  - name: "Chebyshev"
+    params:
+      N: 5
+      M: 1

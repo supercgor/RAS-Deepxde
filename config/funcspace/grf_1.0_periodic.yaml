@@ -2,4 +2,4 @@ name: "GRF"
 alias: "GRF1.0_P"
 params:
   length_scale: 1.0
-  kernal: ExpSineSquared
+  kernel: ExpSineSquared

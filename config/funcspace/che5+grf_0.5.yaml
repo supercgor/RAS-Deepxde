@@ -1,0 +1,10 @@
+name: "UnionSpace"
+alias: "Che5+GRF0.5"
+params:
+  - name: "GRF"
+    params:
+      length_scale: 0.5
+  - name: "Chebyshev"
+    params:
+      N: 5
+      M: 1

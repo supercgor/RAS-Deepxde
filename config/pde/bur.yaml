@@ -1,0 +1,51 @@
+model:
+  name: PPDoNet
+  params:
+    layer_sizes_branch: [101, 100, 50]
+    layer_sizes_trunk: [2, 100, 100, 50]
+    layer_sizes_z: [50, 100, 1]
+    activation: gelu
+    kernel_initializer: Glorot normal
+
+  input_transform: ~
+  
+  output_transform: ~
+  
+train:
+  batch_size: 10000
+  pre_iters: 20000
+  iters: 10000
+  max_save: 1
+  init_train_size: 50
+  final_train_size: 250
+  test_size: 1000
+  test_point: 20000
+  csv_path: f"{work_dir}/${funcspace.alias}_${pde.active.mode}_${pde.model.name}.csv"
+  save_path: f"{work_dir}/${funcspace.alias}_${pde.active.mode}_${pde.model.name}.pth"
+
+active:
+  mode: RASG-L1 # random
+  iters: 100
+  funcs: 100
+  select: 1
+
+pde:
+  name: burgers_equation
+  params:
+    v: 0.01
+
+solver:
+  name: burger_solver
+  params:
+    xmax: 1.0
+    tmax: 1.0
+    nu: ${pde.pde.params.v}
+    Nx: 101
+    Nt: 101
+  
+datasets:
+  workdir: ./data/bur
+  pretrain_path: f"${pde.datasets.workdir}/{utils.get_space_name(space)}_${pde.train.init_train_size}.pth"
+  train_path: f"${pde.datasets.workdir}/{utils.get_space_name(space)}_${pde.train.init_train_size}_t.npz"
+  test_path: f"${pde.datasets.workdir}/{utils.get_space_name(space)}_${pde.train.test_size}_v.npz"
+  

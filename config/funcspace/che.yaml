@@ -1,4 +1,5 @@
 name: "Chebyshev"
+alias: "Che"
 params:
   N: 10
   M: 1

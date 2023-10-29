@@ -1,3 +1,5 @@
 name: "COS"
+alias: "Cos"
 params:
   N: 20
+  omega: 1.0

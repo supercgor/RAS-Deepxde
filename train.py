@@ -41,9 +41,9 @@ def main(cfg):
     pde = utils.get_pde(cfg.pde.pde.name, cfg.pde.pde.params)
     space = utils.get_space(cfg.funcspace.name, cfg.funcspace.params)
     solver = utils.get_solver(cfg.pde.solver.name, cfg.pde.solver.params)
-    csv_path = f"{work_dir}/{utils.get_space_name(space)}_{cfg.pde.train.init_train_size}.csv"
-    model_path = f"{work_dir}/{utils.get_space_name(space)}_{cfg.pde.train.init_train_size}_{cfg.pde.train.final_train_size}.pth"
     
+    csv_path = eval(cfg.pde.train.csv_path)
+    model_path = eval(cfg.pde.train.save_path)
     train_path = eval(cfg.pde.datasets.train_path)
     test_path = eval(cfg.pde.datasets.test_path)
     load_path = eval(cfg.pde.datasets.pretrain_path)

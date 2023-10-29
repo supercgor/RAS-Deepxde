@@ -190,12 +190,12 @@ class BurgersSolver(nn.Module):
         
         return self.grid, u
     
-def diffusion_reaction_solver(v: np.ndarray, xmax: float = 1.0, tmax: float = 1.0, D: float = 0.01, k: float = 0.01, Nx: int = 101, Nt: int = 101, *args, **kwargs) -> Tuple[np.ndarray, np.ndarray]:
+def diffusion_reaction_solver(vs: np.ndarray, xmax: float = 1.0, tmax: float = 1.0, D: float = 0.01, k: float = 0.01, Nx: int = 101, Nt: int = 101, *args, **kwargs) -> Tuple[np.ndarray, np.ndarray]:
     """
     Solve diffusion reaction equation: `u_t = D * u_xx - v(x) * u_x + k * u` with zero boundary condition.
 
     Args:
-        v (np.ndarray): `v(x)` in the equation.
+        v (np.ndarray): `v(x)` in the equation, shape (B, N).
         xmax (float, optional): the right boundary of `x`. Defaults to 1.0.
         tmax (float, optional): the right boundary of `t`. Defaults to 1.0.
         D (float, optional): `D` in the equation. Defaults to 0.01.
@@ -210,17 +210,20 @@ def diffusion_reaction_solver(v: np.ndarray, xmax: float = 1.0, tmax: float = 1.
         xt: (Nx, Nt, 2)
         u(x, t): (Nx, Nt) 
     """
-    x, t, u = solve_ADR(xmin = 0, xmax = xmax, tmin = 0, tmax = tmax, 
-                        k = lambda x: D * np.ones_like(x), 
-                        v = lambda x: np.zeros_like(x), 
-                        g = lambda u: k * u ** 2, 
-                        dg = lambda u: 2 * k * u, 
-                        f = lambda x, t: np.tile(v[:, None], (1, Nt)), 
-                        u0 = lambda x: np.zeros_like(x), 
-                        Nx = Nx, Nt = Nt)
+    us= []
+    for v in vs:
+        x, t, u = solve_ADR(xmin = 0, xmax = xmax, tmin = 0, tmax = tmax, 
+                            k = lambda x: D * np.ones_like(x), 
+                            v = lambda x: np.zeros_like(x), 
+                            g = lambda u: k * u ** 2, 
+                            dg = lambda u: 2 * k * u, 
+                            f = lambda x, t: np.tile(v[:, None], (1, Nt)), 
+                            u0 = lambda x: np.zeros_like(x), 
+                            Nx = Nx, Nt = Nt)
+        us.append(u)
     
     xt = np.asarray(np.meshgrid(x, t, indexing = "ij")).transpose([1,2,0]) # shape (2, 101, 101)
-    
+    u = np.stack(us, axis = 0) # shape (b, 101, 101)
     return u, xt
 
 def advection_solver(v: np.ndarray, xmax: float = 1.0, tmax: float = 1.0, Nx: int = 101, Nt: int = 101, cuda = True, batchsize: int = 100, *args, **kwargs) -> Tuple[np.ndarray, np.ndarray]:
@@ -244,13 +247,8 @@ def advection_solver(v: np.ndarray, xmax: float = 1.0, tmax: float = 1.0, Nx: in
     # xt: shape (2, 101, 101) u: shape (b, 101, 101)
     return u, xt
 
-def burger_solver(v: np.ndarray, xmax: float = 1.0, tmax: float = 1.0, nu = 0.1, Nx = 101, Nt = 101, cuda = True, batchsize: int = 100, *args, **kwargs) -> Tuple[np.ndarray, np.ndarray]:
-    solver = BurgersSolver(xmax = xmax, tmax = tmax, nu= nu, nx = Nx, nt = Nt, upsample = (2, 200),*args, **kwargs)
-    if cuda:
-        solver = solver.cuda()
-    else:
-        solver = solver.cpu()
-    
+def burger_solver(v: np.ndarray, xmax: float = 1.0, tmax: float = 1.0, nu = 0.1, Nx = 101, Nt = 101, batchsize: int = 100, *args, **kwargs) -> Tuple[np.ndarray, np.ndarray]:
+    solver = BurgersSolver(xmax = xmax, tmax = tmax, nu= nu, nx = Nx, nt = Nt, upsample = (2, 200),*args, **kwargs)    
     if batchsize is not None:
         split_num = int(np.ceil(v.shape[0] / batchsize))
         vs = np.array_split(v, split_num)

@@ -3,8 +3,12 @@ from dde.deepxde.data.function_spaces import FunctionSpace, GRF, Chebyshev, Powe
 import numpy as np
 
 class COS(FunctionSpace):
-    def __init__(self, N = 20):
+    def __init__(self, N = 20, omega = 1):
         self._N = N
+        if isinstance(omega, str):
+            self._omega = eval(omega)
+        else:
+            self._omega = omega
     
     def random(self, size: int) -> np.ndarray:
         coeff = np.random.randn(size, self._N)
@@ -16,7 +20,7 @@ class COS(FunctionSpace):
             x = x[:, None]
             # G, 1
         coeff, phi = feature[0], feature[1] # S, N
-        freq = np.arange(0, self._N + 1)
+        freq = np.arange(0, self._N + 1) * self._omega
         phase = np.einsum("i,jk->ij", freq, x) # N, G
         phase = phase[None, ...] + phi[..., None] # S, N, G
         phase = np.cos(phase) # S, N, G
@@ -28,7 +32,7 @@ class COS(FunctionSpace):
             xs = xs[:, None]
             # G, 1
         coeff, phi = features[0], features[1] # S, N
-        freq = np.arange(1, self._N + 1)
+        freq = np.arange(1, self._N + 1) * self._omega
         phase = np.einsum("i,jk->ij", freq, xs) # N, G
         phase = phase[None, ...] + phi[..., None] # S, N, G
         phase = np.cos(phase) # S, N, G

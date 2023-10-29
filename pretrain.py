@@ -30,17 +30,10 @@ def prepare(cfg, train_path, test_path):
     return net, dts, log
 
 def spawn_data(path, size, func_space, solver):
-    funcs = []
-    out = []
-    for i in range(size):
-        print(f"Generating {i}/{size}", end = "\r")
-        vx = func_space.eval_batch(func_space.random(1), np.linspace(0, 1, 101)[:, None])[0]
-        funcs.append(vx)
-        uxt, grids = solver(vx)
-        out.append(uxt)
-    funcs = np.stack(funcs, axis = 0, dtype = np.float32)
-    out = np.stack(out, axis = 0, dtype = np.float32)
-    np.savez(path, funcs = funcs, out = out, grids = grids)
+    print(f"Generating {size} for {type(func_space)}...", end = "\r")
+    funcs = func_space.eval_batch(func_space.random(size), np.linspace(0, 1, 101)[:, None])
+    uxt, grids = solver(funcs)
+    np.savez(path, funcs = funcs, out = uxt, grids = grids)
 
 @hydra.main(config_path="config", config_name="config", version_base=None)
 def main(cfg):

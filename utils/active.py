@@ -33,7 +33,7 @@ def active_selection(n, m, net, space, operator = None, solver = None, mode = "R
         for i in range(m):
             (func, _), _, _ = space.train_next_batch()
             funcs.append(func[0])
-        funcs = np.array(funcs, axis = 0)
+        funcs = np.array(funcs)
         
     if solver is not None:
         out = map(solver, funcs)

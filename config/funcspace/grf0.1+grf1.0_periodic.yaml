@@ -1,9 +1,11 @@
 name: "UnionSpace"
-alias: "GRF0.1+GRF1.0"
+alias: "GRF0.1+GRF1.0_P"
 params:
   - name: "GRF"
     params:
       length_scale: 0.1
+      kernal: ExpSineSquared
   - name: "GRF"
     params:
       length_scale: 1.0
+      kernal: ExpSineSquared

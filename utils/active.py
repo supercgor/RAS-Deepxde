@@ -11,7 +11,7 @@ def active_selection(n, m, net, space, operator = None, solver = None, mode = "R
         model (deepxde.Model): _description_
         space (dde.data.Funcspace): _description_
         operator (_type_, optional): _description_. Defaults to None.
-        solver (_type_, optional): _description_. Defaults to None.
+        solver (_type_, optional): Should be able to handle Batched input. Defaults to None.
         mode (str, optional): _description_. Defaults to "RAS-G".
     """
     funcs = []
@@ -36,8 +36,7 @@ def active_selection(n, m, net, space, operator = None, solver = None, mode = "R
         funcs = np.array(funcs)
         
     if solver is not None:
-        out = map(solver, funcs)
-        out = np.array([u.reshape(-1) for u, grid in out])
+        out, _ = solver(funcs)
         return funcs, out
     else:
         return funcs

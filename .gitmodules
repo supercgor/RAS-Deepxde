@@ -1,4 +1,3 @@
-
 [submodule "deepxde"]
 	path = dde
 	url = https://github.com/supercgor/deepxde.git

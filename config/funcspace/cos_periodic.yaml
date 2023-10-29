@@ -1,0 +1,5 @@
+name: "COS"
+alias: "Cos_P"
+params:
+  N: 5
+  omega: 2 * np.pi

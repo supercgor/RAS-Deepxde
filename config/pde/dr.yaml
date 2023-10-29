@@ -22,6 +22,8 @@ train:
   final_train_size: 250
   test_size: 1000
   test_point: 20000
+  csv_path: f"{work_dir}/${funcspace.alias}_${pde.active.mode}_${pde.model.name}.csv"
+  save_path: f"{work_dir}/${funcspace.alias}_${pde.active.mode}_${pde.model.name}.pth"
 
 active:
   mode: RASG-L1 # random

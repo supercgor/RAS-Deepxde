@@ -1,5 +1,5 @@
 name: "UnionSpace"
-alias: "GRF0.1+Che"
+alias: "Che+GRF0.1"
 params:
   - name: "GRF"
     params:

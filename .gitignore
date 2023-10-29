@@ -3,6 +3,7 @@
 results/*
 legacy/dataset
 outputs
+multirun
 
 ._*
 .DS_Store

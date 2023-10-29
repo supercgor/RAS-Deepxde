@@ -13,11 +13,11 @@ model:
   
 train:
   batch_size: 10000
-  pre_iters: 20000
+  pre_iters: 10000
   iters: 10000
   max_save: 1
-  init_train_size: 50
-  final_train_size: 250
+  init_train_size: 100
+  final_train_size: 500
   test_size: 1000
   test_point: 20000
   csv_path: f"{work_dir}/${funcspace.alias}_${pde.active.mode}_${pde.model.name}.csv"

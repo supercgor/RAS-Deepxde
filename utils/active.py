@@ -37,6 +37,7 @@ def active_selection(n, m, net, space, operator = None, solver = None, mode = "R
         
     if solver is not None:
         out, _ = solver(funcs)
+        out = out.reshape(out.shape[0], -1)
         return funcs, out
     else:
         return funcs

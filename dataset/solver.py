@@ -226,13 +226,8 @@ def diffusion_reaction_solver(vs: np.ndarray, xmax: float = 1.0, tmax: float = 1
     u = np.stack(us, axis = 0) # shape (b, 101, 101)
     return u, xt
 
-def advection_solver(v: np.ndarray, xmax: float = 1.0, tmax: float = 1.0, Nx: int = 101, Nt: int = 101, cuda = True, batchsize: int = 100, *args, **kwargs) -> Tuple[np.ndarray, np.ndarray]:
-    solver = CVCSolver(xmin = 0, xmax = xmax, tmin = 0, tmax = tmax, Nx = Nx, Nt = Nt, *args, **kwargs)
-    if cuda:
-        solver = solver.cuda()
-    else:
-        solver = solver.cpu()
-    
+def advection_solver(v: np.ndarray, xmax: float = 1.0, tmax: float = 1.0, Nx: int = 101, Nt: int = 101, batchsize: int = 100, *args, **kwargs) -> Tuple[np.ndarray, np.ndarray]:
+    solver = CVCSolver(xmin = 0, xmax = xmax, tmin = 0, tmax = tmax, Nx = Nx, Nt = Nt, *args, **kwargs)    
     if batchsize is not None:
         split_num = int(np.ceil(v.shape[0] / batchsize))
         vs = np.array_split(v, split_num)

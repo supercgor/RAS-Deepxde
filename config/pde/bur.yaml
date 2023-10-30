@@ -32,7 +32,7 @@ active:
 pde:
   name: burgers_equation
   params:
-    v: 0.01
+    v: 0.1
 
 solver:
   name: burger_solver
